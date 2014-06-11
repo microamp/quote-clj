@@ -10,9 +10,12 @@
             [ring.handler.dump :refer [handle-dump]]))
 
 (defn index [hdlr]
-  {:status 200
-   :headers {}
-   :body "hello, world"})
+  (let [q (db/read-random-quote)]
+    {:status 200
+     :headers {}
+     :body (str "\"" (:quote q) "\" - "
+                (:author q)
+                " (from: '" (:source q) "', link: " (:link q) ")")}))
 
 (defroutes routes
   "Defines routes"
@@ -29,14 +32,11 @@
     "static")))
 
 (defn -main [port]
-  (jetty/run-jetty app {:port (Integer. port)}))
+  (db/reset-db)
+  (jetty/run-jetty app
+                   {:port (Integer. port)}))
 
 (defn -dev-main [port]
-  (db/delete-table)
-  (db/create-table)
-  (println (db/read-quote-by-id
-            (db/create-quote "Developers know the benefits of everything and trade-offs of nothing."
-                             "Rich Hickey"
-                             "Simplicity Matters"
-                             "http://v.gd/N4LVwq")))
-  (jetty/run-jetty (wrap-reload #'app) {:port (Integer. port)}))
+  (db/reset-db)
+  (jetty/run-jetty (wrap-reload #'app)
+                   {:port (Integer. port)}))

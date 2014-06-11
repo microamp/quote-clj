@@ -1,0 +1,12 @@
+[{:quote "Developers know the benefits of everything and the trade-offs of nothing."
+  :author "Rich Hickey"
+  :source "Simplicity Matters"
+  :link "http://v.gd/N4LVwq"}
+ {:quote "The biggest key insight of Whitehead was there's no such thing as mutable object. We invented them, we need to un-invent them."
+  :author "Rich Hickey"
+  :source "Are We There Yet?"
+  :link "http://v.gd/ajh1ac"}
+ {:quote "Computer is a bad, bad source of distraction. You desperately need to get away from your computer if you try to focus."
+  :author "Rich Hickey"
+  :source "Hammock Driven Development"
+  :link "http://v.gd/gOerlk"}]
